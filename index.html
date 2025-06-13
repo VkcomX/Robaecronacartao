@@ -6,6 +6,9 @@
   <title>Ganhe R$50 Agora!</title>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+    }
     body {
       margin: 0;
       font-family: 'Rubik', sans-serif;
@@ -18,28 +21,30 @@
       min-height: 100vh;
       text-align: center;
       padding: 2rem 1rem;
+      position: relative;
     }
 
     img {
-      max-width: 220px;
+      max-width: 180px;
       height: auto;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
       border-radius: 16px;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
     }
 
     h1 {
-      font-size: 2.6rem;
+      font-size: 2.8rem;
       margin-bottom: 1rem;
       color: #FFD700;
-      text-shadow: 0 0 10px #FFD70099;
+      text-shadow: 0 0 12px #FFD700aa;
     }
 
     p {
       font-size: 1.2rem;
-      color: #eee;
+      color: #f0f0f0;
       margin-bottom: 2rem;
-      max-width: 500px;
+      max-width: 560px;
+      line-height: 1.6;
     }
 
     .btn {
@@ -48,30 +53,31 @@
       font-size: 1.2rem;
       color: white;
       text-decoration: none;
-      border-radius: 40px;
+      border-radius: 50px;
       font-weight: bold;
       box-shadow: 0 4px 20px rgba(0, 200, 83, 0.5);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: all 0.3s ease;
     }
 
     .btn:hover {
-      transform: scale(1.05);
+      transform: scale(1.07);
       box-shadow: 0 6px 30px rgba(0, 200, 83, 0.7);
-    }
-
-    footer {
-      margin-top: 3rem;
-      font-size: 0.9rem;
-      color: #ccc;
-      max-width: 600px;
     }
 
     .cookie-warning {
       margin-top: 2rem;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 1rem;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 1rem 1.5rem;
       border-radius: 10px;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
+      color: #ddd;
+      max-width: 600px;
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.85rem;
+      color: #bbb;
     }
   </style>
 
@@ -81,24 +87,23 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX'); // 🔁 Troque pelo seu ID real depois
+    gtag('config', 'G-XXXXXXXXXX'); // Substitua pelo seu ID do Google Analytics
   </script>
-
 </head>
 <body>
 
   <img src="https://i.pinimg.com/736x/f9/51/1c/f9511ca43bed9b797af7470d1c878321.jpg" alt="Tigrinho do Cassino">
-  
+
   <h1>Ganhe R$50 Agora!</h1>
-  <p>Clique no botão abaixo e receba um presente especial. Válido apenas hoje! 💸🐯</p>
+  <p>Você foi selecionado! Clique no botão abaixo para acessar seu presente especial. Oferta válida por tempo limitado. 💸🐯</p>
   <a class="btn" href="https://www.youtube.com/watch?v=IRZIMGxxgf8" target="_blank">🎰 APERTE E GANHE</a>
 
   <div class="cookie-warning">
-  Continuar navegando, você entrará em risco!
+    Este site utiliza cookies para análise anônima de navegação. Ao continuar, você concorda com nossa política de privacidade.
   </div>
 
   <footer>
-    © 2025 Tigrinho Games
+    © 2025 Tigrinho Games.
   </footer>
 
 </body>
