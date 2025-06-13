@@ -3,56 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ganhe R$50 Agora</title>
+  <title>Ganhe R$50 Agora!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
-      background: linear-gradient(135deg, #f9f9f9, #e0e0e0);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      font-family: 'Rubik', sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
       text-align: center;
-      padding: 100px 20px;
+      padding: 2rem;
     }
 
     h1 {
-      color: #222;
-      font-size: 2.5em;
-      margin-bottom: 30px;
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      color: #FFD700;
+      text-shadow: 0 0 10px #FFD70099;
     }
 
-    .btn-ganhar {
-      background: linear-gradient(90deg, #ffd700, #ff8c00);
-      border: none;
+    p {
+      font-size: 1.2rem;
+      color: #eee;
+      margin-bottom: 2rem;
+      max-width: 500px;
+    }
+
+    .btn {
+      background: linear-gradient(45deg, #ff416c, #ff4b2b);
+      padding: 1rem 2.5rem;
+      font-size: 1.2rem;
       color: white;
-      font-size: 1.5em;
-      padding: 20px 40px;
-      border-radius: 15px;
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.3s ease;
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+      text-decoration: none;
+      border-radius: 40px;
+      font-weight: bold;
+      box-shadow: 0 4px 20px rgba(255, 75, 43, 0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .btn-ganhar:hover {
+    .btn:hover {
       transform: scale(1.05);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 6px 30px rgba(255, 75, 43, 0.7);
     }
 
-    .footer {
-      margin-top: 80px;
-      color: #666;
-      font-size: 0.9em;
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #999;
     }
   </style>
 </head>
 <body>
 
-  <h1>Aperte o botão e ganhe R$50!</h1>
-  
-  <button class="btn-ganhar" onclick="window.location.href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'">
-    APERTE AQUI
-  </button>
+  <h1>Ganhe R$50 Agora!</h1>
+  <p>Clique no botão abaixo e receba um presente especial. Oferta limitada, exclusiva para você! 🎁</p>
+  <a class="btn" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">🎉 APERTE AQUI</a>
 
-  <div class="footer">
-    *Oferta exclusiva por tempo limitado
-  </div>
+  <footer>
+    © 2025 Oferta Exclusiva — Todos os direitos reservados.
+  </footer>
 
 </body>
 </html>
