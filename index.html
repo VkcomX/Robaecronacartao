@@ -63,8 +63,27 @@
       margin-top: 3rem;
       font-size: 0.9rem;
       color: #ccc;
+      max-width: 600px;
+    }
+
+    .cookie-warning {
+      margin-top: 2rem;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1rem;
+      border-radius: 10px;
+      font-size: 0.8rem;
     }
   </style>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX'); // 🔁 Troque pelo seu ID real depois
+  </script>
+
 </head>
 <body>
 
@@ -73,6 +92,10 @@
   <h1>Ganhe R$50 Agora!</h1>
   <p>Clique no botão abaixo e receba um presente especial. Válido apenas hoje! 💸🐯</p>
   <a class="btn" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">🎰 APERTE E GANHE</a>
+
+  <div class="cookie-warning">
+    Este site utiliza cookies do Google Analytics para fins estatísticos. Nenhuma informação pessoal é coletada. Ao continuar navegando, você concorda com isso.
+  </div>
 
   <footer>
     © 2025 Tigrinho Games — Apenas diversão 😄
