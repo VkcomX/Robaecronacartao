@@ -3,62 +3,187 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PIKAMON Launcher - Clone</title>
+  <title>PIKAMON Launcher</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Inter:wght@300;500&display=swap');
-    :root{
-      --bg1:#07132a; /* deep blue */
-      --bg2:#0b3a6a; /* mid blue */
-      --accent:#3fe0ff;
-      --glass: rgba(255,255,255,0.06);
+    :root {
+      --bg1: #2a0000;
+      --bg2: #650000;
+      --accent: #ffcc00;
+      --glass: rgba(255, 255, 255, 0.08);
     }
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial;background: radial-gradient(1200px 600px at 10% 10%, rgba(63,224,255,0.06), transparent), linear-gradient(180deg,var(--bg1),var(--bg2));color:#dff6ff;}
-    .container{max-width:1100px;margin:48px auto;padding:32px;}
 
-    /* Language pill */
-    .lang-pill{position:relative;display:inline-flex;gap:12px;background:rgba(255,255,255,0.08);backdrop-filter:blur(6px);padding:8px;border-radius:999px;box-shadow:0 6px 18px rgba(2,10,30,0.6);}
-    .lang-pill button{background:transparent;border:0;color:#e6fbff;padding:8px 14px;border-radius:999px;font-weight:600;cursor:pointer}
-    .lang-pill .active{background:linear-gradient(90deg,#1bd7ff22,#8bd4ff33);box-shadow:0 6px 18px rgba(27,215,255,0.12);}
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Inter, system-ui, Arial;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(255, 0, 0, 0.2), transparent),
+                  linear-gradient(180deg, var(--bg1), var(--bg2));
+      color: #ffeebb;
+      position: relative;
+      overflow-x: hidden;
+    }
 
-    /* Hero */
-    .hero{display:flex;flex-direction:column;align-items:center;gap:18px;padding:48px 8px 64px;text-align:center}
-    .logo{font-family:Montserrat, sans-serif;font-size:96px;letter-spacing:8px;font-weight:800;color:transparent;background:linear-gradient(90deg,#70f2ff,#4ea1ff 50%,#7bffcb);-webkit-background-clip:text;background-clip:text;text-shadow:0 10px 40px rgba(58,124,255,0.14)}
-    .subtitle{color:#bfefff;font-size:16px;letter-spacing:2px}
+    /* Fundo Pikachu estilizado */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url('caminho/para-sua-imagem-pikachu.png') center/cover no-repeat;
+      opacity: 0.2;
+      filter: blur(6px) saturate(1.3);
+      z-index: -1;
+    }
 
-    .hero .buttons{display:flex;gap:16px}
-    .btn{padding:12px 22px;border-radius:12px;font-weight:600;border:2px solid rgba(255,255,255,0.06);cursor:pointer}
-    .btn.primary{background:linear-gradient(90deg,#18d5ff,#3b9bff);box-shadow:0 12px 30px rgba(24,210,255,0.12);color:#021429}
-    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.08);color:#cfefff}
+    .container {
+      max-width: 1100px;
+      margin: 48px auto;
+      padding: 32px;
+    }
 
-    /* cards */
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:22px;border-radius:14px;backdrop-filter:blur(6px);box-shadow:0 8px 30px rgba(3,18,40,0.5);text-align:center}
-    .card h3{margin:10px 0 6px;color:#e6fbff}
-    .card p{font-size:13px;color:#bfe6ff;margin:0}
+    .lang-pill {
+      position: relative;
+      display: inline-flex;
+      gap: 12px;
+      background: var(--glass);
+      backdrop-filter: blur(6px);
+      padding: 8px;
+      border-radius: 999px;
+      box-shadow: 0 6px 18px rgba(2, 10, 30, 0.6);
+    }
+    .lang-pill button {
+      background: transparent;
+      border: 0;
+      color: #ffeebb;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .lang-pill .active {
+      background: linear-gradient(90deg, #ffcc00aa, #ff6600bb);
+      box-shadow: 0 6px 18px rgba(255, 204, 0, 0.2);
+    }
 
-    /* floating image area */
-    .hero-art{width:100%;max-width:900px;height:220px;margin-top:10px;border-radius:14px;overflow:hidden;box-shadow:0 30px 90px rgba(6,28,60,0.6);position:relative}
-    .hero-art img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.9) saturate(1.05)}
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      padding: 48px 8px 64px;
+      text-align: center;
+    }
 
-    .footer-btn{position:fixed;right:18px;bottom:18px;background:linear-gradient(90deg,#2b97ff,#00e0ff);padding:10px 14px;border-radius:10px;color:#021429;font-weight:700;box-shadow:0 12px 40px rgba(0,160,255,0.12);border:none;cursor:pointer}
+    .logo {
+      font-family: Montserrat, sans-serif;
+      font-size: 96px;
+      letter-spacing: 8px;
+      font-weight: 800;
+      color: var(--accent);
+      text-shadow: 0 10px 40px rgba(255, 204, 0, 0.5);
+    }
 
-    /* responsive */
-    @media(max-width:900px){.cards{grid-template-columns:repeat(1,1fr)}.logo{font-size:56px}}
-      /* Pokemon background */
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      background:url('/mnt/data/0cdf29fa-da1e-40bb-bf97-0481f517d27b.png') center/cover no-repeat;
-      opacity:0.18;
-      filter:blur(4px) saturate(1.2);
-      z-index:-1;
+    .subtitle {
+      color: #ffeebb;
+      font-size: 16px;
+      letter-spacing: 2px;
+    }
+
+    .hero-art {
+      width: 100%;
+      max-width: 900px;
+      height: 220px;
+      margin-top: 10px;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 30px 90px rgba(6, 0, 0, 0.6);
+      position: relative;
+    }
+    .hero-art img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.9) saturate(1.1);
+    }
+
+    .buttons {
+      display: flex;
+      gap: 16px;
+    }
+    .btn {
+      padding: 12px 22px;
+      border-radius: 12px;
+      font-weight: 600;
+      border: 2px solid rgba(255, 255, 255, 0.06);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+    }
+    .btn.primary {
+      background: linear-gradient(90deg, #ffcc00, #ff8800);
+      box-shadow: 0 12px 30px rgba(255, 204, 0, 0.3);
+      color: #210700;
+    }
+    .btn.ghost {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #ffeebb;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 28px;
+    }
+    .card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+      padding: 22px;
+      border-radius: 14px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 8px 30px rgba(3, 0, 0, 0.5);
+      text-align: center;
+    }
+    .card h3 {
+      margin: 10px 0 6px;
+      color: #ffeebb;
+    }
+    .card p {
+      font-size: 13px;
+      color: #ffd;
+      margin: 0;
+    }
+
+    @media(max-width: 900px) {
+      .cards { grid-template-columns: 1fr; }
+      .logo { font-size: 56px; }
+    }
+
+    .footer-btn {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      background: linear-gradient(90deg, #ff5500, #ffcc00);
+      padding: 10px 14px;
+      border-radius: 10px;
+      color: #210700;
+      font-weight: 700;
+      box-shadow: 0 12px 40px rgba(255, 170, 0, 0.3);
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .footer-btn:hover {
+      transform: scale(1.1);
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div style="display:flex;justify-content:flex-end;"> 
+    <div style="display:flex; justify-content:flex-end;">
       <div class="lang-pill" role="tablist" aria-label="Seleção de idioma">
         <button class="active" data-lang="pt">BR Português</button>
         <button data-lang="en">US English</button>
@@ -71,7 +196,7 @@
       <div class="subtitle">GAME LAUNCHER<br><small style="opacity:0.8">Minecraft • Pixelmon • Aventura</small></div>
 
       <div class="hero-art" aria-hidden="true">
-        <img src="/mnt/data/0cdf29fa-da1e-40bb-bf97-0481f517d27b.png" alt="screenshot do launcher" />
+        <img src="caminho/para-sua-imagem-art.png" alt="Arte de fundo" />
       </div>
 
       <div class="buttons">
@@ -79,7 +204,7 @@
         <button class="btn ghost" id="learn">Saiba Mais</button>
       </div>
 
-      <div class="cards" style="width:100%;margin-top:28px">
+      <div class="cards">
         <div class="card">
           <div style="font-size:28px">⚡</div>
           <h3>Rápido e Confiável</h3>
@@ -91,9 +216,9 @@
           <p>Interface intuitiva pensada para jogadores de todas as idades.</p>
         </div>
         <div class="card">
-          <div style="font-size:28px">👥</div>
-          <h3>Comunidade</h3>
-          <p>Suporte, notícias e eventos direto do launcher.</p>
+          <div style="font-size:28px">🌩️</div>
+          <h3>Poder Elétrico</h3>
+          <p>Poder inspirado por criaturas elétricas lendárias.</p>
         </div>
       </div>
     </main>
@@ -102,20 +227,21 @@
   <button class="footer-btn" id="open">Ver Launcher →</button>
 
   <script>
-    // Language pill behavior
-    document.querySelectorAll('.lang-pill button').forEach(b=>b.addEventListener('click',()=>{
-      document.querySelectorAll('.lang-pill button').forEach(x=>x.classList.remove('active'));
-      b.classList.add('active');
-    }));
+    document.querySelectorAll('.lang-pill button').forEach(b => {
+      b.addEventListener('click', () => {
+        document.querySelectorAll('.lang-pill button').forEach(x => x.classList.remove('active'));
+        b.classList.add('active');
+      });
+    });
 
-    document.getElementById('download').addEventListener('click',()=>{
-      alert('Simulação de download. Substitua este comportamento pelo arquivo/instalador real.');
+    document.getElementById('download').addEventListener('click', () => {
+      alert('Simulação de download — substitua para baixar o seu instalador.');
     });
-    document.getElementById('learn').addEventListener('click',()=>{
-      window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+    document.getElementById('learn').addEventListener('click', () => {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     });
-    document.getElementById('open').addEventListener('click',()=>{
-      alert('Abrir launcher — na versão real você conectaria ao executável ou à página interna.');
+    document.getElementById('open').addEventListener('click', () => {
+      alert('Abrir launcher — aqui você pode ligar para seu executável.');
     });
   </script>
 </body>
