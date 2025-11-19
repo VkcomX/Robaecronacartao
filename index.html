@@ -44,7 +44,16 @@
 
     /* responsive */
     @media(max-width:900px){.cards{grid-template-columns:repeat(1,1fr)}.logo{font-size:56px}}
-  </style>
+      /* Pokemon background */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:url('/mnt/data/0cdf29fa-da1e-40bb-bf97-0481f517d27b.png') center/cover no-repeat;
+      opacity:0.18;
+      filter:blur(4px) saturate(1.2);
+      z-index:-1;
+    }
 </head>
 <body>
   <div class="container">
