@@ -1,248 +1,267 @@
-<!doctype html>
-<html lang="pt-BR">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PIKAMON Launcher</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Inter:wght@300;500&display=swap');
-    :root {
-      --bg1: #2a0000;
-      --bg2: #650000;
-      --accent: #ffcc00;
-      --glass: rgba(255, 255, 255, 0.08);
-    }
+import React, { useState, useMemo } from "react";
 
-    html, body {
-      height: 100%;
-      margin: 0;
-      font-family: Inter, system-ui, Arial;
-      background: radial-gradient(1200px 600px at 10% 10%, rgba(255, 0, 0, 0.2), transparent),
-                  linear-gradient(180deg, var(--bg1), var(--bg2));
-      color: #ffeebb;
-      position: relative;
-      overflow-x: hidden;
-    }
+// PokeTiers - Single-file React component (Tailwind CSS required in the hosting project)
+// Default export a React component you can paste into a create-react-app / Vite + React project.
+// Uses Tailwind classes for styling. Replace placeholder images with actual assets if desired.
 
-    /* Fundo Pikachu estilizado */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: url('caminho/para-sua-imagem-pikachu.png') center/cover no-repeat;
-      opacity: 0.2;
-      filter: blur(6px) saturate(1.3);
-      z-index: -1;
-    }
+const sampleData = {
+  meta: {
+    title: "PokeTiers",
+    subtitle: "Todas as tiers competitivas — banlist, regras e recursos visuais",
+  },
+  tiers: [
+    {
+      id: "ou",
+      name: "OU",
+      description: "OverUsed — tier principal para competição padrão.",
+      banned: ["Power Herb (U-turn glitch)", "Moody", "Baton Pass"],
+      pokemon: [
+        { id: 1, name: "Landorus-Therian", ability: "Intimidate", item: "Choice Scarf" },
+        { id: 2, name: "Heatran", ability: "Flash Fire", item: "Leftovers" },
+      ],
+    },
+    {
+      id: "uu",
+      name: "UU",
+      description: "UnderUsed — para Pokémon menos comuns no OU.",
+      // Lista de banidos (exemplo). Edite livremente no painel.
+      banned: [
+        "Arceus",
+        "Calyrex-Ice",
+        "Calyrex-Shadow",
+        "Darkrai",
+        "Deoxys",
+        "Dialga",
+        "Dracovish",
+        "Eternatus",
+        "Genesect",
+        "Giratina",
+        "Ho-Oh",
+        "Kyogre",
+        "Mewtwo",
+        "Zacian",
+      ],
+      pokemon: [
+        { id: 3, name: "Togekiss", ability: "Serene Grace", item: "Leftovers" },
+        { id: 4, name: "Scizor", ability: "Technician", item: "Choice Band" },
+      ],
+    },
+    {
+      id: "ru",
+      name: "RU",
+      description: "RarelyUsed — tier abaixo do UU.",
+      banned: [],
+      pokemon: [],
+    },
+    { id: "nu", name: "NU", description: "NotUsed", banned: [], pokemon: [] },
+    { id: "pu", name: "PU", description: "PU tier", banned: [], pokemon: [] },
+    { id: "ubers", name: "Ubers", description: "Tier com todos os lendários e poderes extremos.", banned: [], pokemon: [] },
+    { id: "lc", name: "LC", description: "Little Cup — torneio de formas básicas.", banned: [], pokemon: [] },
+  ],
+  rules: {
+    tournament: `Regras do Torneio - PokeTiers\n1) Cada jogador pode usar apenas 1 lendário por time.\n2) Banlist aplicada por tier (veja banlist no painel).\n3) Formato: Bo3, com bans de itens conforme a tier.\n4) Conexão: jogo oficial / simulador especificado.\n\nComando sugerido para organizar torneio (exemplo):\n> start-tournament --format "UU" --rounds 3 --allow-legendary false --banlist uu-banlist.json\n\nSubstitua os parâmetros conforme necessário.`,
+  },
+};
 
-    .container {
-      max-width: 1100px;
-      margin: 48px auto;
-      padding: 32px;
-    }
+function Header({ title, subtitle }) {
+  return (
+    <header className="w-full py-6 px-6 flex items-center justify-between bg-gradient-to-r from-red-500 via-yellow-300 to-blue-500 text-white shadow-md">
+      <div className="flex items-center gap-4">
+        <div className="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center ring-2 ring-white/30">
+          {/* Pokéball SVG */}
+          <svg viewBox="0 0 100 100" className="w-10 h-10">
+            <circle cx="50" cy="50" r="45" fill="white" />
+            <path d="M5 50a45 45 0 0 1 90 0" fill="black" />
+            <circle cx="50" cy="50" r="12" fill="#f3f4f6" stroke="#111827" strokeWidth="3" />
+          </svg>
+        </div>
+        <div>
+          <h1 className="text-2xl font-extrabold tracking-tight">{title}</h1>
+          <p className="text-sm opacity-90">{subtitle}</p>
+        </div>
+      </div>
+      <nav className="flex items-center gap-3">
+        <a className="text-sm bg-white/20 px-3 py-2 rounded-lg" href="#rules">Regras</a>
+        <a className="text-sm bg-white/20 px-3 py-2 rounded-lg" href="#export">Exportar</a>
+      </nav>
+    </header>
+  );
+}
 
-    .lang-pill {
-      position: relative;
-      display: inline-flex;
-      gap: 12px;
-      background: var(--glass);
-      backdrop-filter: blur(6px);
-      padding: 8px;
-      border-radius: 999px;
-      box-shadow: 0 6px 18px rgba(2, 10, 30, 0.6);
-    }
-    .lang-pill button {
-      background: transparent;
-      border: 0;
-      color: #ffeebb;
-      padding: 8px 14px;
-      border-radius: 999px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    .lang-pill .active {
-      background: linear-gradient(90deg, #ffcc00aa, #ff6600bb);
-      box-shadow: 0 6px 18px rgba(255, 204, 0, 0.2);
-    }
+function TierCard({ tier, onSelect }) {
+  return (
+    <div
+      className="bg-white/5 hover:bg-white/10 cursor-pointer p-4 rounded-2xl shadow-sm"
+      onClick={() => onSelect(tier.id)}
+    >
+      <h3 className="text-lg font-bold">{tier.name}</h3>
+      <p className="text-xs opacity-80 mt-1">{tier.description}</p>
+      <p className="mt-2 text-xs opacity-70">Banidos: {tier.banned.length}</p>
+    </div>
+  );
+}
 
-    .hero {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 18px;
-      padding: 48px 8px 64px;
-      text-align: center;
-    }
-
-    .logo {
-      font-family: Montserrat, sans-serif;
-      font-size: 96px;
-      letter-spacing: 8px;
-      font-weight: 800;
-      color: var(--accent);
-      text-shadow: 0 10px 40px rgba(255, 204, 0, 0.5);
-    }
-
-    .subtitle {
-      color: #ffeebb;
-      font-size: 16px;
-      letter-spacing: 2px;
-    }
-
-    .hero-art {
-      width: 100%;
-      max-width: 900px;
-      height: 220px;
-      margin-top: 10px;
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 30px 90px rgba(6, 0, 0, 0.6);
-      position: relative;
-    }
-    .hero-art img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      filter: brightness(0.9) saturate(1.1);
-    }
-
-    .buttons {
-      display: flex;
-      gap: 16px;
-    }
-    .btn {
-      padding: 12px 22px;
-      border-radius: 12px;
-      font-weight: 600;
-      border: 2px solid rgba(255, 255, 255, 0.06);
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-    .btn:hover {
-      transform: scale(1.05);
-    }
-    .btn.primary {
-      background: linear-gradient(90deg, #ffcc00, #ff8800);
-      box-shadow: 0 12px 30px rgba(255, 204, 0, 0.3);
-      color: #210700;
-    }
-    .btn.ghost {
-      background: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: #ffeebb;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-top: 28px;
-    }
-    .card {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
-      padding: 22px;
-      border-radius: 14px;
-      backdrop-filter: blur(6px);
-      box-shadow: 0 8px 30px rgba(3, 0, 0, 0.5);
-      text-align: center;
-    }
-    .card h3 {
-      margin: 10px 0 6px;
-      color: #ffeebb;
-    }
-    .card p {
-      font-size: 13px;
-      color: #ffd;
-      margin: 0;
-    }
-
-    @media(max-width: 900px) {
-      .cards { grid-template-columns: 1fr; }
-      .logo { font-size: 56px; }
-    }
-
-    .footer-btn {
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-      background: linear-gradient(90deg, #ff5500, #ffcc00);
-      padding: 10px 14px;
-      border-radius: 10px;
-      color: #210700;
-      font-weight: 700;
-      box-shadow: 0 12px 40px rgba(255, 170, 0, 0.3);
-      border: none;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-    .footer-btn:hover {
-      transform: scale(1.1);
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div style="display:flex; justify-content:flex-end;">
-      <div class="lang-pill" role="tablist" aria-label="Seleção de idioma">
-        <button class="active" data-lang="pt">BR Português</button>
-        <button data-lang="en">US English</button>
-        <button data-lang="es">ES Español</button>
+function PokemonRow({ p }) {
+  // placeholder sprite url (can be replaced by real assets)
+  const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${(p.id % 898) + 1}.png`;
+  return (
+    <div className="flex items-center gap-4 p-3 rounded-lg hover:bg-white/3">
+      <img src={imageUrl} alt={p.name} className="w-14 h-14 object-contain" />
+      <div>
+        <div className="font-semibold">{p.name}</div>
+        <div className="text-xs opacity-70">{p.ability} • {p.item}</div>
       </div>
     </div>
+  );
+}
 
-    <main class="hero">
-      <div class="logo">PIKAMON</div>
-      <div class="subtitle">GAME LAUNCHER<br><small style="opacity:0.8">Minecraft • Pixelmon • Aventura</small></div>
+export default function PokeTiersApp() {
+  const [data, setData] = useState(sampleData);
+  const [selectedTierId, setSelectedTierId] = useState("uu");
+  const [query, setQuery] = useState("");
+  const tiers = data.tiers;
+  const selectedTier = tiers.find((t) => t.id === selectedTierId) || tiers[0];
 
-      <div class="hero-art" aria-hidden="true">
-        <img src="caminho/para-sua-imagem-art.png" alt="Arte de fundo" />
-      </div>
+  const filteredPokemon = useMemo(() => {
+    if (!selectedTier) return [];
+    if (!query) return selectedTier.pokemon;
+    const q = query.toLowerCase();
+    return selectedTier.pokemon.filter((p) => p.name.toLowerCase().includes(q));
+  }, [selectedTier, query]);
 
-      <div class="buttons">
-        <button class="btn primary" id="download">Baixar Agora</button>
-        <button class="btn ghost" id="learn">Saiba Mais</button>
-      </div>
+  function addBannedItem(item) {
+    if (!item) return;
+    setData((prev) => ({
+      ...prev,
+      tiers: prev.tiers.map((t) => t.id === selectedTier.id ? { ...t, banned: Array.from(new Set([...(t.banned || []), item])) } : t)
+    }));
+  }
 
-      <div class="cards">
-        <div class="card">
-          <div style="font-size:28px">⚡</div>
-          <h3>Rápido e Confiável</h3>
-          <p>Inicie seus jogos em segundos com atualizações automáticas.</p>
-        </div>
-        <div class="card">
-          <div style="font-size:28px">🎮</div>
-          <h3>Fácil de usar</h3>
-          <p>Interface intuitiva pensada para jogadores de todas as idades.</p>
-        </div>
-        <div class="card">
-          <div style="font-size:28px">🌩️</div>
-          <h3>Poder Elétrico</h3>
-          <p>Poder inspirado por criaturas elétricas lendárias.</p>
-        </div>
-      </div>
-    </main>
-  </div>
+  function removeBannedItem(item) {
+    setData((prev) => ({
+      ...prev,
+      tiers: prev.tiers.map((t) => t.id === selectedTier.id ? { ...t, banned: (t.banned || []).filter(i => i !== item) } : t)
+    }));
+  }
 
-  <button class="footer-btn" id="open">Ver Launcher →</button>
+  function exportJSON() {
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${data.meta.title.replace(/\s+/g,'_').toLowerCase()}_export.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
 
-  <script>
-    document.querySelectorAll('.lang-pill button').forEach(b => {
-      b.addEventListener('click', () => {
-        document.querySelectorAll('.lang-pill button').forEach(x => x.classList.remove('active'));
-        b.classList.add('active');
-      });
-    });
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-slate-100">
+      <Header title={data.meta.title} subtitle={data.meta.subtitle} />
 
-    document.getElementById('download').addEventListener('click', () => {
-      alert('Simulação de download — substitua para baixar o seu instalador.');
-    });
-    document.getElementById('learn').addEventListener('click', () => {
-      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-    });
-    document.getElementById('open').addEventListener('click', () => {
-      alert('Abrir launcher — aqui você pode ligar para seu executável.');
-    });
-  </script>
-</body>
-</html>
+      <main className="max-w-6xl mx-auto p-6 grid grid-cols-1 md:grid-cols-4 gap-6">
+        <aside className="md:col-span-1">
+          <div className="bg-white/3 p-4 rounded-2xl shadow-inner">
+            <h2 className="text-xl font-bold mb-3">Tiers</h2>
+            <div className="grid grid-cols-2 gap-3">
+              {tiers.map((t) => (
+                <TierCard key={t.id} tier={t} onSelect={setSelectedTierId} />
+              ))}
+            </div>
+
+            <div className="mt-5">
+              <h4 className="text-sm font-semibold mb-2">Pesquisar Pokémon na tier</h4>
+              <input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="ex: Togekiss"
+                className="w-full p-2 rounded-lg bg-white/5 border border-white/5 focus:outline-none"
+              />
+              <div className="mt-4 text-xs opacity-80">
+                Selecionada: <span className="font-semibold">{selectedTier?.name}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-5 bg-white/3 p-4 rounded-2xl">
+            <h3 className="font-bold">Banlist — {selectedTier?.name}</h3>
+            <p className="text-xs opacity-80 mt-1">Gerencie itens e pokémon banidos dessa tier.</p>
+            <div className="mt-3 space-y-2">
+              {(selectedTier?.banned || []).map((b) => (
+                <div key={b} className="flex items-center justify-between bg-white/5 p-2 rounded-md">
+                  <div className="text-sm">{b}</div>
+                  <button onClick={() => removeBannedItem(b)} className="text-xs px-2 py-1 rounded bg-red-600/70">Remover</button>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-3 flex gap-2">
+              <input id="newBan" placeholder="Adicionar banido (nome/item)" className="flex-1 p-2 rounded-lg bg-white/5" />
+              <button onClick={() => { const el = document.getElementById('newBan'); addBannedItem(el.value); el.value=''; }} className="px-4 py-2 rounded-lg bg-emerald-500 text-black font-bold">Adicionar</button>
+            </div>
+          </div>
+        </aside>
+
+        <section className="md:col-span-3">
+          <div className="bg-white/5 p-4 rounded-2xl">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-2xl font-extrabold">{selectedTier?.name}</h2>
+                <p className="text-sm opacity-80 mt-1">{selectedTier?.description}</p>
+              </div>
+              <div className="flex items-center gap-3">
+                <button onClick={exportJSON} className="px-4 py-2 rounded-lg bg-yellow-400 text-black font-semibold">Exportar JSON</button>
+              </div>
+            </div>
+
+            <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="bg-white/3 p-3 rounded-xl">
+                <h4 className="font-bold">Pokémon na tier</h4>
+                <div className="mt-3 space-y-2">
+                  {filteredPokemon.length === 0 && <div className="text-xs opacity-70">Nenhum Pokémon adicionado ainda.</div>}
+                  {filteredPokemon.map((p) => <PokemonRow key={p.id} p={p} />)}
+                </div>
+              </div>
+
+              <div className="bg-white/3 p-3 rounded-xl">
+                <h4 className="font-bold">Resumo de Banlist</h4>
+                <p className="text-xs opacity-80 mt-2">Total de banidos nesta tier: <span className="font-semibold">{selectedTier?.banned?.length || 0}</span></p>
+                <ul className="mt-3 list-disc list-inside text-sm space-y-1">
+                  {(selectedTier?.banned || []).slice(0,10).map((b)=> <li key={b}>{b}</li>)}
+                </ul>
+
+                <div className="mt-4">
+                  <h5 className="font-semibold">Sugestões de torneio</h5>
+                  <textarea readOnly value={data.rules.tournament} className="w-full mt-2 p-2 bg-white/5 rounded-md text-xs h-36" />
+                </div>
+              </div>
+            </div>
+
+            <div id="export" className="mt-6">
+              <h4 className="font-bold">Exportar / Compartilhar</h4>
+              <p className="text-xs opacity-80 mt-1">Você pode exportar a configuração completa do site para JSON e importar em outro servidor.</p>
+              <div className="mt-3">
+                <button onClick={exportJSON} className="px-4 py-2 rounded-lg bg-indigo-500 font-semibold">Baixar JSON</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="rules" className="mt-6 bg-white/5 p-4 rounded-2xl">
+            <h3 className="font-extrabold">Regras e Prompt de Comando</h3>
+            <p className="text-sm opacity-80 mt-2">Use esse bloco como modelo para organizar torneios e comunicar regras oficiais aos participantes.</p>
+            <pre className="mt-3 bg-black/60 p-3 rounded text-sm overflow-auto">
+{data.rules.tournament}
+            </pre>
+
+            <div className="mt-4 text-sm opacity-90">
+              <strong>Dica:</strong> Edite a banlist de cada tier antes de iniciar um torneio. Exporte o JSON e use o parâmetro <code>--banlist [arquivo.json]</code> no seu script de organização de torneios.
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer className="text-center p-6 text-xs opacity-70">
+        Criado com ❤️ para fãs de Pokémon — personalize cores, imagens e conteúdo conforme quiser.
+      </footer>
+    </div>
+  );
+}
