@@ -1,42 +1,129 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Meu Site</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background: #f2f2f2;
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .container {
-            background: white;
-            width: 90%;
-            max-width: 600px;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.2);
-            text-align: center;
-        }
-        h1 {
-            color: #d40000;
-        }
-        p {
-            font-size: 18px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PokeTiers - Todas as Tiers</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(#1a1a1a, #000);
+      color: white;
+    }
+    header {
+      background: linear-gradient(to right, #ff0000, #ffcc00, #3399ff);
+      padding: 20px;
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px black;
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
+    .tier-card {
+      background: rgba(255,255,255,0.1);
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    h2 {
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      padding-bottom: 5px;
+    }
+    ul {
+      padding-left: 18px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      opacity: 0.7;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Seu Site Pronto 🎉</h1>
-        <p>Você pode editar este HTML como quiser e enviar direto para o GitHub Pages.</p>
+  <header>PokeTiers • Listas Completa das Tiers</header>
+
+  <div class="container">
+
+    <div class="tier-card">
+      <h2>OU — OverUsed</h2>
+      <p>Tier principal, usada pela maioria dos jogadores competitivos.</p>
+      <h3>Banidos:</h3>
+      <ul>
+        <li>Power Herb (U-turn glitch)</li>
+        <li>Moody</li>
+        <li>Baton Pass</li>
+      </ul>
     </div>
+
+    <div class="tier-card">
+      <h2>UU — UnderUsed</h2>
+      <p>Tier abaixo do OU, Pokémon fortes mas menos usados.</p>
+      <h3>Banidos:</h3>
+      <ul>
+        <li>Arceus</li>
+        <li>Calyrex-Ice</li>
+        <li>Calyrex-Shadow</li>
+        <li>Darkrai</li>
+        <li>Deoxys</li>
+        <li>Dialga</li>
+        <li>Dracovish</li>
+        <li>Eternatus</li>
+        <li>Genesect</li>
+        <li>Giratina</li>
+        <li>Ho-Oh</li>
+        <li>Kyogre</li>
+        <li>Mewtwo</li>
+        <li>Zacian</li>
+      </ul>
+    </div>
+
+    <div class="tier-card">
+      <h2>RU — RarelyUsed</h2>
+      <p>Tier abaixo de UU, com Pokémon mais situacionais.</p>
+    </div>
+
+    <div class="tier-card">
+      <h2>NU — NotUsed</h2>
+      <p>Pokémon pouco usados, geralmente fracos competitivamente.</p>
+    </div>
+
+    <div class="tier-card">
+      <h2>PU</h2>
+      <p>Tier abaixo de NU.</p>
+    </div>
+
+    <div class="tier-card">
+      <h2>Ubers</h2>
+      <p>Tier dos lendários mais fortes e restritos.</p>
+    </div>
+
+    <div class="tier-card">
+      <h2>LC — Little Cup</h2>
+      <p>Tier apenas para formas básicas que utilizam Eviolite.</p>
+    </div>
+
+    <div class="tier-card">
+      <h2>Regras de Campeonato</h2>
+      <pre style="background:rgba(255,255,255,0.1); padding:15px; border-radius:10px; white-space:pre-wrap;">
+1) Cada jogador pode usar apenas 1 lendário por time.
+2) Banlist aplicada por tier (veja acima).
+3) Formato: melhor de 3 (Bo3).
+4) Conexão: jogo oficial ou simulador.
+
+Comando sugerido:
+start-tournament --format "UU" --rounds 3 --allow-legendary false --banlist uu-banlist.json
+      </pre>
+    </div>
+
+  </div>
+
+  <footer>Site criado com ❤️ para fãs de Pokémon. Pode editar livremente.</footer>
 </body>
 </html>
