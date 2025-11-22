@@ -1,129 +1,234 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PokeTiers - Todas as Tiers</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(#1a1a1a, #000);
-      color: white;
-    }
-    header {
-      background: linear-gradient(to right, #ff0000, #ffcc00, #3399ff);
-      padding: 20px;
-      text-align: center;
-      font-size: 28px;
-      font-weight: bold;
-      text-shadow: 2px 2px 4px black;
-    }
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 20px;
-    }
-    .tier-card {
-      background: rgba(255,255,255,0.1);
-      padding: 15px;
-      margin-bottom: 15px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.15);
-    }
-    h2 {
-      border-bottom: 1px solid rgba(255,255,255,0.3);
-      padding-bottom: 5px;
-    }
-    ul {
-      padding-left: 18px;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      opacity: 0.7;
-      font-size: 14px;
-    }
-  </style>
-</head>
-<body>
-  <header>PokeTiers • Listas Completa das Tiers</header>
+<!DOCTYPE html>  
+<html lang="pt-BR">  
+<head>  
+  <meta charset="UTF-8" />  
+  <meta name="viewport" content=":contentReference[oaicite:0]{index=0} initial-scale=1.0" />  
+  <title>Tiers Smogon Pokémon (Gen VI / XY)</title>  
+  <style>  
+    body {  
+      margin: 0;  
+      padding: 0;  
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;  
+      background: linear-gradient(135deg, #a8d8ea, #074b7b); /* azul-esverdeado estilo Scarlet/Violet */  
+      color: #f0f0f0;  
+    }  
+    .overlay {  
+      background: rgba(0, 0, 0, 0.6);  
+      min-height: 100vh;  
+      padding: 40px;  
+    }  
+    .container {  
+      max-width: 900px;  
+      margin: auto;  
+      background: rgba(20, 20, 20, 0.8);  
+      padding: 30px;  
+      border-radius: 20px;  
+      box-shadow: 0 0 20px rgba(0,0,0,0.7);  
+    }  
+    h1 {  
+      text-align: center;  
+      font-size: 42px;  
+      color: #ffcb05;  
+      text-shadow: 2px 2px 5px #000;  
+    }  
+    h2 {  
+      color: #3b4cca; /* azul Pokémon */  
+      margin-top: 30px;  
+    }  
+    p, ul {  
+      font-size: 18px;  
+      line-height: 1.6;  
+    }  
+    ul {  
+      margin-left: 20px;  
+    }  
+    .clause {  
+      margin-top: 10px;  
+      font-size: 16px;  
+      color: #ddd;  
+    }  
+  </style>  
+</head>  
+<body>  
+  <div class="overlay">  
+    <div class="container">  
+      <h1>Tiers Competitivas (Smogon Gen VI / XY)</h1>  
 
-  <div class="container">
+      <h2>Ubers</h2>  
+      <p>A tier mais “inclusiva”: permite quase todos os Pokémon, especialmente os lendários ou “top”.</p>  
+      <p class="clause"><strong>Cláusulas principais:</strong></p>  
+      <ul>  
+        <li>Claúsulas Smogon-wide aplicadas.</li>  
+        <li>**Mega Rayquaza Clause**: Rayquaza **não pode mega evoluir**. :contentReference[oaicite:1]{index=1}</li>  
+      </ul>  
+      <p class="clause"><strong>Obs:</strong> Não é “banida” uma lista grande de Pokémon — Ubers em si é um formato de poder alto. :contentReference[oaicite:2]{index=2}</p>  
 
-    <div class="tier-card">
-      <h2>OU — OverUsed</h2>
-      <p>Tier principal, usada pela maioria dos jogadores competitivos.</p>
-      <h3>Banidos:</h3>
-      <ul>
-        <li>Power Herb (U-turn glitch)</li>
-        <li>Moody</li>
-        <li>Baton Pass</li>
-      </ul>
-    </div>
+      <h2>OU (OverUsed)</h2>  
+      <p>Tier padrão para batalhas competitivas “normais” (não lendários muito quebrados).</p>  
+      <p class="clause"><strong>Cláusulas OU (Gen VI):</strong></p>  
+      <ul>  
+        <li>Cláusula de Evasão: **Minimize** e **Double Team** são banidos. :contentReference[oaicite:3]{index=3}</li>  
+        <li>Cláusula Moody: Pokémon com habilidade **Moody** são proibidos. :contentReference[oaicite:4]{index=4}</li>  
+        <li>Cláusula OHKO: movimentos como **Fissure, Guillotine, Horn Drill, Sheer Cold** são banidos. :contentReference[oaicite:5]{index=5}</li>  
+        <li>Sleep Clause: só pode deixar um Pokémon adversário dormir por vez (exceto se for induzido por certos golpes). :contentReference[oaicite:6]{index=6}</li>  
+        <li>Species Clause: não pode ter dois Pokémon com mesmo número da Pokédex na equipe. :contentReference[oaicite:7]{index=7}</li>  
+      </ul>  
+      <p class="clause"><strong>Banidos do OU (Gen VI / XY):</strong></p>  
+      <ul>  
+        <li>Aegislash</li>  
+        <li>Arceus (todas as formas)</li>  
+        <li>Blaziken</li>  
+        <li>Darkrai</li>  
+        <li>Deoxys (todas as formas)</li>  
+        <li>Dialga</li>  
+        <li>Genesect</li>  
+        <li>Giratina / Giratina-O</li>  
+        <li>Groudon</li>  
+        <li>Ho-Oh</li>  
+        <li>Kyogre</li>  
+        <li>Kyurem-White</li>  
+        <li>Lugia</li>  
+        <li>Mewtwo</li>  
+        <li>Palkia</li>  
+        <li>Rayquaza</li>  
+        <li>Reshiram</li>  
+        <li>Shaymin-Sky</li>  
+        <li>Xerneas</li>  
+        <li>Yveltal</li>  
+        <li>Zekrom</li>  
+      </ul>  
+      <p class="clause"><strong>Itens banidos no OU (Gen VI):</strong></p>  
+      <ul>  
+        <li>Gengarite</li>  
+        <li>Kangaskhanite</li>  
+        <li>Lucarionite</li>  
+        <li>Mawilite</li>  
+        <li>Salamencite</li>  
+        <li>Soul Dew</li>  
+      </ul>  
+      <p class="clause"><strong>Movimentos banidos:</strong> Swagger. :contentReference[oaicite:8]{index=8}</p>  
 
-    <div class="tier-card">
-      <h2>UU — UnderUsed</h2>
-      <p>Tier abaixo do OU, Pokémon fortes mas menos usados.</p>
-      <h3>Banidos:</h3>
-      <ul>
-        <li>Arceus</li>
-        <li>Calyrex-Ice</li>
-        <li>Calyrex-Shadow</li>
-        <li>Darkrai</li>
-        <li>Deoxys</li>
-        <li>Dialga</li>
-        <li>Dracovish</li>
-        <li>Eternatus</li>
-        <li>Genesect</li>
-        <li>Giratina</li>
-        <li>Ho-Oh</li>
-        <li>Kyogre</li>
-        <li>Mewtwo</li>
-        <li>Zacian</li>
-      </ul>
-    </div>
+      <h2>UU (UnderUsed)</h2>  
+      <p>Tier para Pokémon que não são tão comuns no OU — uso moderado.</p>  
+      <p class="clause"><strong>Cláusulas principais (mesmas de OU):</strong></p>  
+      <ul>  
+        <li>Endless Battle Clause (recycle + Leppa Berry etc). :contentReference[oaicite:9]{index=9}</li>  
+        <li>Evasion Clause (Minimize, Double Team). :contentReference[oaicite:10]{index=10}</li>  
+        <li>Moody Clause.</li>  
+        <li>OHKO Clause.</li>  
+        <li>Sleep Clause.</li>  
+        <li>Species Clause.</li>  
+      </ul>  
+      <p class="clause"><strong>Banidos no UU (Gen VI / XY):</strong></p>  
+      <ul>  
+        <li>Todos os Pokémon de Ubers.</li>  
+        <li>Crawdaunt</li>  
+        <li>Diggersby</li>  
+        <li>Hawlucha</li>  
+        <li>Klefki</li>  
+        <li>Scolipede</li>  
+        <li>Smeargle</li>  
+        <li>Staraptor</li>  
+        <li>Terrakion</li>  
+        <li>Thundurus-Therian</li>  
+        <li>Togekiss</li>  
+        <li>Tornadus-Therian</li>  
+        <li>Venomoth</li>  
+        <li>Victini</li>  
+        <li>Volcarona</li>  
+        <li>Weavile</li>  
+        <li>Zygarde</li>  
+      </ul>  
+      <p class="clause"><strong>Itens banidos no UU (Gen VI):</strong></p>  
+      <ul>  
+        <li>Alakazite</li>  
+        <li>Heracronite</li>  
+        <li>Medichamite</li>  
+        <li>Pinsirite</li>  
+      </ul>  
+      <p class="clause"><strong>Habilidades banidas no UU:</strong></p>  
+      <ul>  
+        <li>Drizzle</li>  
+        <li>Drought</li>  
+        <li>Shadow Tag</li>  
+      </ul>  
+      <p class="clause"><strong>Movimentos banidos:</strong> Swagger. :contentReference[oaicite:11]{index=11}</p>  
 
-    <div class="tier-card">
-      <h2>RU — RarelyUsed</h2>
-      <p>Tier abaixo de UU, com Pokémon mais situacionais.</p>
-    </div>
+      <h2>RU (RarelyUsed)</h2>  
+      <p>Tier para Pokémon que raramente são usados — abaixo de UU em uso.</p>  
+      <p class="clause"><strong>Cláusulas RU (Gen VI):</strong></p>  
+      <ul>  
+        <li>Cláusulas Smogon-wide (mesmas de OU/UU).</li>  
+        <li>Baton Pass Clause: **Baton Pass** é banido. :contentReference[oaicite:12]{index=12}</li>  
+      </ul>  
+      <p class="clause"><strong>Banidos no RU (Gen VI / XY):</strong></p>  
+      <ul>  
+        <li>Pokémon de Ubers, OU, UU.</li>  
+        <li>Dragalge</li>  
+        <li>Froslass</li>  
+        <li>Kyurem</li>  
+        <li>Moltres</li>  
+        <li>Pangoro</li>  
+        <li>Shuckle</li>  
+        <li>Tornadus (forma normal)</li>  
+        <li>Yanmega</li>  
+        <li>Zoroark</li>  
+      </ul>  
+      <p class="clause"><strong>Itens banidos no RU:</strong></p>  
+      <ul><li>Houndoominite</li></ul>  
+      <p class="clause"><strong>Habilidades banidas no RU:</strong></p>  
+      <ul>  
+        <li>Drizzle</li>  
+        <li>Drought</li>  
+        <li>Shadow Tag</li>  
+      </ul>  
+      <p class="clause"><strong>Movimentos banidos:</strong> Swagger. :contentReference[oaicite:13]{index=13}</p>  
 
-    <div class="tier-card">
-      <h2>NU — NotUsed</h2>
-      <p>Pokémon pouco usados, geralmente fracos competitivamente.</p>
-    </div>
+      <h2>NU (NeverUsed)</h2>  
+      <p>Tier para Pokémon com uso muito baixo, “raramente usados até dentro de RU”.</p>  
+      <p class="clause"><strong>Cláusulas NU:</strong></p>  
+      <ul>  
+        <li>Muitas das mesmas cláusulas de tiers maiores (Endless Battle, Evasion, etc). :contentReference[oaicite:14]{index=14}</li>  
+      </ul>  
+      <p class="clause"><strong>Banidos no NU (Gen VI):</strong></p>  
+      <ul>  
+        <li>Pokémon de Ubers, OU, UU e RU por uso. :contentReference[oaicite:15]{index=15}</li>  
+        <li>Exemplos: Combusken, Sigilyph. :contentReference[oaicite:16]{index=16}</li>  
+      </ul>  
+      <p class="clause"><strong>Habilidades banidas no NU:</strong></p>  
+      <ul>  
+        <li>Drizzle</li>  
+        <li>Drought</li>  
+        <li>Shadow Tag</li>  
+      </ul>  
+      <p class="clause"><strong>Movimentos banidos:</strong> Swagger, OHKO (Fissure, etc), Sleep Clause, etc. :contentReference[oaicite:17]{index=17}</p>  
 
-    <div class="tier-card">
-      <h2>PU</h2>
-      <p>Tier abaixo de NU.</p>
-    </div>
+      <h2>PU</h2>  
+      <p>Tier abaixo de NU — para Pokémon realmente pouco usados.</p>  
+      <p class="clause"><strong>Regras gerais:</strong></p>  
+      <ul>  
+        <li>Seguem muitas das cláusulas das tiers acima (endless battle, evasion, species, etc.). :contentReference[oaicite:18]{index=18}</li>  
+        <li>Banem Pokémon que estatisticamente “destroem o equilíbrio” da tier por terem stats muito altos para a PU.</li>  
+      </ul>  
 
-    <div class="tier-card">
-      <h2>Ubers</h2>
-      <p>Tier dos lendários mais fortes e restritos.</p>
-    </div>
+      <h2>LC (Little Cup)</h2>  
+      <p>Somente Pokémon em sua forma básica, geralmente nível 5, que ainda evoluem.</p>  
+      <p class="clause"><strong>Cláusulas LC:</strong></p>  
+      <ul>  
+        <li>Endless Battle Clause (mesma das outras). :contentReference[oaicite:19]{index=19}</li>  
+        <li>Evasion Clause: Minimize / Double Team proibidos. :contentReference[oaicite:20]{index=20}</li>  
+        <li>Moody, OHKO, Species, Sleep Clause, etc. :contentReference[oaicite:21]{index=21}</li>  
+        <li>Pokémon devem estar no nível 5.</li>  
+      </ul>  
+      <p class="clause"><strong>Banidos no LC (Gen VI):</strong></p>  
+      <ul>  
+        <li>Vulpix, Gligar, Scyther, Sneasel, Drifloon, Yanma (exemplos usados por Smogon / comunidades). :contentReference[oaicite:22]{index=22}</li>  
+      </ul>  
 
-    <div class="tier-card">
-      <h2>LC — Little Cup</h2>
-      <p>Tier apenas para formas básicas que utilizam Eviolite.</p>
-    </div>
-
-    <div class="tier-card">
-      <h2>Regras de Campeonato</h2>
-      <pre style="background:rgba(255,255,255,0.1); padding:15px; border-radius:10px; white-space:pre-wrap;">
-1) Cada jogador pode usar apenas 1 lendário por time.
-2) Banlist aplicada por tier (veja acima).
-3) Formato: melhor de 3 (Bo3).
-4) Conexão: jogo oficial ou simulador.
-
-Comando sugerido:
-start-tournament --format "UU" --rounds 3 --allow-legendary false --banlist uu-banlist.json
-      </pre>
-    </div>
-
-  </div>
-
-  <footer>Site criado com ❤️ para fãs de Pokémon. Pode editar livremente.</footer>
-</body>
-</html>
+      <footer style="margin-top:40px; text-align:center; font-size:14px; opacity:0.8;">  
+        Dados baseados na Smogon University – Gen VI (XY) Tiers :contentReference[oaicite:23]{index=23}  
+      </footer>  
+    </div>  
+  </div>  
+</body>  
+</html>  
